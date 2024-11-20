@@ -10,7 +10,7 @@ class Empleado{
   method puedeCumplir(mision) = mision.habilidadesRequeridas().all({habilidad => self.puedeUsar(habilidad)})
   method recibirDanio(cantidad){ salud = (salud - cantidad).max(0) }
   method sobrevive() = salud > 0
-  method cumplir(mision) = mision.serCumplidaPor(self)
+  method cumplir(mision) { mision.serCumplidaPor(self) }
   method registrar(mision){
     if(self.sobrevive())
         tipo.misionCompletada(self, mision)
@@ -24,7 +24,7 @@ class Empleado{
 class Jefe inherits Empleado{
   const subordinados = []
 
-  override method posee(habilidad) = super(habilidad) || subordinados.any({subordinado => subordinado.posee(habilidad)})
+  override method posee(habilidad) = super(habilidad) || subordinados.any({subordinado => subordinado.puedeUsar(habilidad)})
 }
 
 class Equipo{
@@ -42,8 +42,9 @@ class Oficinista{
     var estrellas = 0
 
     method saludCritica() = 40 - 5 * estrellas
+    method ganarEstrella(){ estrellas += 1 }
     method misionCompletada(empleado, mision){ 
-        estrellas += 1 
+        self.ganarEstrella()
         if(estrellas == 3)
             empleado.ascender()
     }
