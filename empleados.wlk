@@ -33,6 +33,9 @@ class Equipo{
     method puedeCumplir(mision) = miembros.any({miembro => miembro.puedeCumplir(mision)})
     method recibirDanio(cantidad){ miembros.forEach({miembro => miembro.recibirDanio(cantidad/3)}) }
     method cumplir(mision) = mision.serCumplidaPor(self)
+    method registrar(mision){
+        miembros.foreach({miembro => miembro.registrar(mision)})
+    }
 }
 
 class Oficinista{

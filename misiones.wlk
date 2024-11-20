@@ -6,6 +6,6 @@ class Mision{
         if(!algo.puedeCumplir(self))
             throw new DomainException(message="No se puede llevar a cabo la mision")
         algo.recibirDanio(peligrosidad)
-        algo.registrarMision()
+        algo.registrar(self)
     }
 }
