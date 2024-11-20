@@ -1,9 +1,6 @@
-import example.pepita
+class Empleado{
+  var salud
 
-describe "group of tests for pepita" {
-
-  test "pepita has initial energy" {
-    assert.equals(100, pepita.energy())
-  }
-
+  method saludCritica()
+  method estaIncapacitado() = salud < self.saludCritica()
 }
